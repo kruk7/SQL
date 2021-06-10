@@ -38,7 +38,8 @@ VALUES (DEFAULT, 'Programiści'),
        (DEFAULT, 'Malarze'),
        (DEFAULT, 'Hydraulicy'),
        (DEFAULT, 'Bokserzy'),
-       (DEFAULT, 'Hutnicy')
+       (DEFAULT, 'Hutnicy'),
+	   (DEFAULT, 'Nauczyciele')
 ;
 
 INSERT INTO users_to_group (id, user_id, group_id)
@@ -99,4 +100,25 @@ FROM (
 	 ) average
 ;
 
+-- show all users with group
+SELECT 
+	u.user_id,
+	u.display_name,
+    ug.group_name
+FROM users AS u
+JOIN users_to_group AS utg ON u.user_id = utg.user_id
+JOIN users_group AS ug ON utg.group_id = ug.group_id
+;
 
+-- show all plumbers
+SELECT 
+	DISTINCT u.display_name AS 'plumbers'
+ -- ug.group_name
+FROM users AS u
+JOIN users_to_group AS utg ON u.user_id = utg.user_id
+JOIN users_group AS ug ON utg.group_id = ug.group_id
+WHERE group_name in ('Hydraulicy')
+;
+
+-- left join
+-- 
